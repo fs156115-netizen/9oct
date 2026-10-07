@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Small Question For You 💖</title>
+  <style>
+    :root {
+      --bg-color: #ffeef2;
+      --card-bg: #ffffff;
+      --primary: #ff4b72;
+      --primary-hover: #e6335c;
+      --secondary: #ffb3c6;
+      --text: #4a3e3d;
+      --border: #ffccd5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Hearts Background */
+    .bg-heart {
+      position: fixed;
+      font-size: 1.5rem;
+      user-select: none;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 25px;
+      padding: 25px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(255, 75, 114, 0.2);
+      border: 3px solid var(--border);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ffe3e8;
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      border: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+      color: #3d2b2e;
+    }
+
+    p.subtitle {
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .art-container {
+      margin: 15px 0 20px;
+      border-radius: 20px;
+      padding: 20px;
+      background: #fff0f3;
+      border: 2px dashed var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      min-height: 60px;
+      align-items: center;
+    }
+
+    button {
+      padding: 14px 32px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(255, 75, 114, 0.3);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.95);
+    }
+
+    .btn-secondary {
+      background-color: #fff0f3;
+      color: var(--primary);
+      border: 2px solid var(--border);
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #6b5256;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 15px;
+      font-size: 0.95rem;
+      background: #fff8f9;
+      outline: none;
+      color: var(--text);
+    }
+
+    .grid-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .grid-option {
+      border: 2px solid var(--border);
+      padding: 10px 5px;
+      border-radius: 15px;
+      cursor: pointer;
+      background: #fff8f9;
+      font-size: 0.85rem;
+      font-weight: bold;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .grid-option span {
+      font-size: 1.4rem;
+    }
+
+    .grid-option.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: scale(1.03);
+    }
+
+    .note-box {
+      background: #fff0f3;
+      padding: 12px;
+      border-radius: 15px;
+      border: 2px dashed var(--border);
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Floating Hearts -->
+  <div class="bg-heart" style="left: 10%; animation-delay: 0s;">💖</div>
+  <div class="bg-heart" style="left: 30%; animation-delay: 2s;">🌸</div>
+  <div class="bg-heart" style="left: 50%; animation-delay: 4s;">✨</div>
+  <div class="bg-heart" style="left: 70%; animation-delay: 1s;">💗</div>
+  <div class="bg-heart" style="left: 90%; animation-delay: 3s;">🎀</div>
+
+  <!-- STEP 1: Main Question -->
+  <div class="card" id="step-1">
+    <div class="badge">🎀 A SMALL QUESTION 🎀</div>
+    <h1>Will you go on a date with me? 🥺👉👈</h1>
+    <p class="subtitle">you have to come babe ❤️</p>
+    
+    <div class="art-container">
+      🐱💖🐶
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-primary" onclick="goToStep(2)">Yes 💖</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: When & Activity -->
+  <div class="card hidden" id="step-2">
+    <div class="badge">✨ STEP 1 OF 4 ✨</div>
+    <h1>When works for you? 🗓️</h1>
+    <p class="subtitle" style="color:#8c7176; font-weight:normal;">Pick a date and long time — I'll arrange everything! 🥰</p>
+
+    <div class="form-group">
+      <label for="date-select">📅 Date</label>
+      <input type="date" id="date-select">
+    </div>
+
+    <div class="form-group">
+      <label for="time-select">⏰ Time</label>
+      <select id="time-select">
+        <option value="5:00 PM">5:00 PM 🌆</option>
+        <option value="6:00 PM">6:00 PM 🌇</option>
+        <option value="7:00 PM">7:00 PM 🌙</option>
+        <option value="8:00 PM">8:00 PM ⭐️</option>
+        <option value="9:00 PM">9:00 PM 🌌</option>
+        <option value="10:00 PM">10:00 PM ✨</option>
+        <option value="11:00 PM">11:00 PM 🕯️ (All Night!)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>🎯 What should we do?</label>
+      <select id="activity-select">
+        <option value="Sunset Walk 🌅">Sunset Walk 🌅</option>
+        <option value="Cozy Coffee Date ☕">Cozy Coffee Date ☕</option>
+        <option value="Arcade & Games 🕹️">Arcade & Games 🕹️</option>
+        <option value="Long Drive 🚗">Long Drive 🚗</option>
+        <option value="Surprise Me! ✨">Surprise Me! ✨</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="goToStep(3)">Next: What to eat? 🍕 →</button>
+  </div>
+
+  <!-- STEP 3: Food Selection -->
+  <div class="card hidden" id="step-3">
+    <div class="badge">✨ STEP 2 OF 4 ✨</div>
+    <h1>What should we eat? 😋</h1>
+    <p class="subtitle" style="color:#8c7176; font-weight:normal;">The most important decision of all! 🍕</p>
+
+    <div class="grid-options">
+      <div class="grid-option selected" onclick="selectFood(this, 'Italian 🍝')">
+        <span>🍝</span> Italian
+      </div>
+      <div class="grid-option" onclick="selectFood(this, 'Sushi 🍣')">
+        <span>🍣</span> Sushi
+      </div>
+      <div class="grid-option" onclick="selectFood(this, 'Pizza 🍕')">
+        <span>🍕</span> Pizza
+      </div>
+      <div class="grid-option" onclick="selectFood(this, 'Burgers 🍔')">
+        <span>🍔</span> Burgers
+      </div>
+      <div class="grid-option" onclick="selectFood(this, 'Dessert First 🍨')">
+        <span>🍨</span> Desserts
+      </div>
+      <div class="grid-option" onclick="selectFood(this, 'You Pick! 💖')">
+        <span>💖</span> You Pick
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+      <button class="btn-secondary" style="position: static; flex: 1;" onclick="goToStep(2)">← Back</button>
+      <button class="btn-primary" style="flex: 2;" onclick="goToStep(4)">Next: Kisses & Hugs! 💋 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Kisses & Hugs Question -->
+  <div class="card hidden" id="step-4">
+    <div class="badge">✨ STEP 3 OF 4 ✨</div>
+    <h1>How many kisses & hugs do I get? 💋🫂</h1>
+    <p class="subtitle" style="color:#8c7176; font-weight:normal;">Be honest babe! ❤️</p>
+
+    <div class="grid-options">
+      <div class="grid-option selected" onclick="selectAffection(this, '10 Kisses & Hugs 💋')">
+        <span>💋</span> 10
+      </div>
+      <div class="grid-option" onclick="selectAffection(this, '100 Kisses & Hugs 🫂')">
+        <span>🫂</span> 100
+      </div>
+      <div class="grid-option" onclick="selectAffection(this, 'Unlimited Kisses & Hugs Forever! ♾️❤️')">
+        <span>♾️</span> Unlimited!
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+      <button class="btn-secondary" style="position: static; flex: 1;" onclick="goToStep(3)">← Back</button>
+      <button class="btn-primary" style="flex: 2;" onclick="goToStep(5)">One last thing! 💌 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: Love Note -->
+  <div class="card hidden" id="step-5">
+    <div class="badge">✨ STEP 4 OF 4 ✨</div>
+    <h1>Leave a cute message 💌</h1>
+    <p class="subtitle" style="color:#8c7176; font-weight:normal;">Add a small secret request or love note for me!</p>
+
+    <div class="form-group">
+      <label for="love-note">📝 Secret Note / Special Wish</label>
+      <textarea id="love-note" rows="3" placeholder="e.g. Can't wait! ❤️"></textarea>
+    </div>
+
+    <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="finishPlan()">It's a Date! 🌹✨</button>
+  </div>
+
+  <!-- STEP 6: Final Summary -->
+  <div class="card hidden" id="step-6">
+    <div class="badge">🎉 IT'S A DATE! 🎉</div>
+    <h1>Yay! I can't wait babe! 🥰</h1>
+    
+    <div class="art-container">
+      👩‍❤️‍💋‍👨💖✨
+    </div>
+
+    <div class="note-box" id="summary-details"></div>
+    <div class="note-box" id="summary-note" style="margin-top: 8px; font-style: italic; background: #fff;"></div>
+
+    <p style="margin-top: 15px; font-size: 0.9rem; color: #8c7176; font-weight: bold;">
+      Screenshot this and send it to me! 📸💖
+    </p>
+  </div>
+
+  <script>
+    let selectedFood = "Italian 🍝";
+    let selectedAffection = "10 Kisses & Hugs 💋";
+
+    // Set default date input to today
+    document.getElementById('date-select').valueAsDate = new Date();
+
+    function goToStep(step) {
+      document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+      document.getElementById(`step-${step}`).classList.remove('hidden');
+    }
+
+    function selectFood(element, food) {
+      element.parentElement.querySelectorAll('.grid-option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedFood = food;
+    }
+
+    function selectAffection(element, affection) {
+      element.parentElement.querySelectorAll('.grid-option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedAffection = affection;
+    }
+
+    function finishPlan() {
+      const date = document.getElementById('date-select').value;
+      const time = document.getElementById('time-select').value;
+      const activity = document.getElementById('activity-select').value;
+      const note = document.getElementById('love-note').value;
+
+      document.getElementById('summary-details').innerHTML = `
+        <strong>📍 Plan:</strong> ${activity}<br>
+        <strong>🍴 Food:</strong> ${selectedFood}<br>
+        <strong>💋 Love:</strong> ${selectedAffection}<br>
+        <strong>📅 Date & Time:</strong> ${date} at ${time}
+      `;
+
+      if (note.trim() !== "") {
+        document.getElementById('summary-note').innerText = `💌 Note: "${note}"`;
+      } else {
+        document.getElementById('summary-note').style.display = 'none';
+      }
+
+      goToStep(6);
+    }
+  </script>
+</body>
+</html>
